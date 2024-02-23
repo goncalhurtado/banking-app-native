@@ -1,12 +1,14 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
+import { NativeRouter } from "react-router-native";
 import Main from "./Main.js";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <Main />
+      <NativeRouter>
+        <Main />
+      </NativeRouter>
     </SafeAreaProvider>
   );
 }

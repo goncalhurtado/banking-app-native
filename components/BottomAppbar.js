@@ -1,13 +1,11 @@
-import { FAB } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StyleSheet, View } from "react-native";
 import appbar from "../style/AppBar";
 import { Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/AntDesign";
-import { TouchableWithoutFeedback } from "react-native";
+import { Link } from "react-router-native";
 
 const BOTTOM_APPBAR_HEIGHT = 56;
-// const MEDIUM_FAB_HEIGHT = 56;
 
 const styles = StyleSheet.create({
   bottom: {
@@ -35,24 +33,26 @@ export default function BottomAppbar() {
         ]}
       >
         <View style={appbar.container}>
-          <TouchableWithoutFeedback>
+          <Link to="/" style={appbar.button}>
             <View style={appbar.button}>
               <Icon name="home" size={25} color="white" />
               <Text style={appbar.text}>Inicio</Text>
             </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
+          </Link>
+
+          <Link to="/transfers" style={appbar.button}>
             <View style={appbar.button}>
               <Icon name="swap" size={25} color="white" />
               <Text style={appbar.text}>Transferir</Text>
             </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
+          </Link>
+
+          <Link to="/config" style={appbar.button}>
             <View style={appbar.button}>
               <Icon name="setting" size={25} color="white" />
               <Text style={appbar.text}>Configuracion</Text>
             </View>
-          </TouchableWithoutFeedback>
+          </Link>
         </View>
       </View>
     </View>
