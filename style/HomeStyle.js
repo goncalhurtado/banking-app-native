@@ -41,18 +41,20 @@ export const transferHistoryStyle = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: "#e0e0e0",
-    display: "flex",
+    alignItems: "center",
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
   },
-
-  title: {
+  avatar: {
+    marginRight: 10,
+  },
+  name: {
     fontSize: 20,
     fontWeight: "bold",
-    marginVertical: 10,
   },
-  subTitle: {
-    fontSize: 16,
+  amount: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
