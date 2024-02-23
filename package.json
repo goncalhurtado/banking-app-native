@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons-react-native": "^2.3.2",
+    "axios": "^1.6.7",
     "expo": "~50.0.7",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
