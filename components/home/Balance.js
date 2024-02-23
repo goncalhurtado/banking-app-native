@@ -3,11 +3,11 @@ import { Text } from "react-native-paper";
 import { ScrollView, View } from "react-native";
 import { balanceStyle } from "../../style/HomeStyle";
 
-function Balance() {
+function Balance({ balance }) {
   return (
     <View style={balanceStyle.container}>
       <Text style={balanceStyle.title}>Saldo</Text>
-      <Text style={balanceStyle.balance}>131241</Text>
+      <Text style={balanceStyle.balance}>{balance}</Text>
     </View>
   );
 }

@@ -10,6 +10,7 @@ const appbar = StyleSheet.create({
     backgroundColor: "#6200EE",
     padding: 0,
     margin: 0,
+    zIndex: 4,
   },
   button: {
     flex: 1,

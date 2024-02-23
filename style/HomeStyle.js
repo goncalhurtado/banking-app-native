@@ -33,9 +33,20 @@ export const balanceStyle = StyleSheet.create({
 export const transferHistoryStyle = StyleSheet.create({
   container: {
     backgroundColor: "#f5f5f5",
-    padding: 20,
-    borderRadius: 5,
+    display: "flex",
+    flexDirection: "column",
   },
+  itemContainer: {
+    backgroundColor: "#f5f5f5",
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#e0e0e0",
+    display: "flex",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
   title: {
     fontSize: 20,
     fontWeight: "bold",

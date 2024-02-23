@@ -1,14 +1,22 @@
-import { Text } from "react-native-paper";
-import { ScrollView, View } from "react-native";
+import { Text, View } from "react-native";
 import { transferHistoryStyle } from "../../style/HomeStyle";
+import UserContext from "../../context/userContext";
+import { useContext } from "react";
+import TransferItem from "./TransferItem";
 
-function Balance() {
+function TransferHistory({ transferHistory }) {
+  const user = useContext(UserContext);
+
   return (
     <View>
       <Text style={transferHistoryStyle.title}>Movimientos</Text>
-      <View style={transferHistoryStyle.container}></View>
+      <View style={transferHistoryStyle.container}>
+        {transferHistory.map((transfer, index) => (
+          <TransferItem transfer={transfer} key={index} user={user} />
+        ))}
+      </View>
     </View>
   );
 }
 
-export default Balance;
+export default TransferHistory;
