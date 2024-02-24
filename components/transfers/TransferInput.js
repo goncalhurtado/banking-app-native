@@ -3,7 +3,6 @@ import { TextInput, ActivityIndicator, HelperText } from "react-native-paper";
 import { TouchableOpacity, View, Text } from "react-native";
 import { transfersStyle } from "../../style/TransfersStyle";
 import { Keyboard } from "react-native";
-import { axiosInstance } from "../../config/axiosInstance";
 import { checkDestination } from "../../helpers/transferHelper";
 
 const TransferInput = ({ newTransfer, setNewTransfer }) => {
@@ -29,7 +28,12 @@ const TransferInput = ({ newTransfer, setNewTransfer }) => {
     if (!response) {
       return;
     }
-    setNewTransfer({ ...newTransfer, destination: response });
+    setNewTransfer({
+      ...newTransfer,
+      destination: response._id,
+      destinationName: response.name,
+      destinationLastname: response.lastname,
+    });
   };
 
   useEffect(() => {

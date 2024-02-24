@@ -5,13 +5,14 @@ import { homeStyle } from "../style/HomeStyle";
 import { useState, useEffect, useContext } from "react";
 import { axiosInstance } from "../config/axiosInstance";
 import UserContext from "../context/userContext";
+import BalanceContext from "../context/balanceContext";
 
 const Home = () => {
-  const [balance, setBalance] = useState(null);
   const [transferHistory, setTransferHistory] = useState([]);
   const [detail, setDetail] = useState({ visible: false, data: {} });
 
   const user = useContext(UserContext);
+  const { balance, setBalance } = useContext(BalanceContext);
 
   const getBalance = async () => {
     try {

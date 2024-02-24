@@ -5,8 +5,8 @@ export const checkDestination = async (text, setError, setLoading) => {
     setLoading(true);
     const response = await axiosInstance.get(`/checkDestination/${text}`);
     setLoading(false);
-    const { _id } = response.data.destinationUser;
-    return _id;
+    const { destinationUser } = response.data;
+    return destinationUser;
   } catch (error) {
     console.log(error.response.data.message || error.message);
     setLoading(false);

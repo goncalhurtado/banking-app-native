@@ -74,3 +74,46 @@ export const transfersStyle = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export const amountStyle = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  destinationContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  name: {
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+  balance: {
+    fontSize: 15,
+    color: "grey",
+  },
+  amount: {
+    width: "auto",
+    height: "auto",
+    fontSize: 40,
+    fontWeight: "bold",
+    color: "#6200EE",
+  },
+  btn: {
+    backgroundColor: "#6200EE",
+    width: "auto",
+    height: 50,
+    borderRadius: 10,
+    padding: 10,
+    paddingHorizontal: 20,
+    marginTop: 15,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

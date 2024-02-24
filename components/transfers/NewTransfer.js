@@ -9,10 +9,13 @@ const NewTransfer = ({ setAction }) => {
   const [newTransfer, setNewTransfer] = useState({
     origin: "",
     destination: "",
+    destinationName: "",
+    destinationLastname: "",
     notes: "",
     amount: 0,
     done: false,
   });
+
   const goBack = () => {
     setAction(false);
   };
@@ -30,7 +33,10 @@ const NewTransfer = ({ setAction }) => {
             />
           </>
         ) : (
-          <SetAmount setNewTransfer={setNewTransfer} />
+          <SetAmount
+            newTransfer={newTransfer}
+            setNewTransfer={setNewTransfer}
+          />
         )}
       </View>
     </View>

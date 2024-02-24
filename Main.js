@@ -6,6 +6,7 @@ import Transfers from "./pages/Transfers.js";
 import { Routes, Route } from "react-router-native";
 import { useState, useEffect } from "react";
 import UserContext from "./context/userContext";
+import BalanceContext from "./context/balanceContext"; // Importa BalanceContext
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -19,18 +20,22 @@ function Main() {
     alias: "ramaj.emilio.fakebank",
   });
 
+  const [balance, setBalance] = useState(null); // Crea un estado para el balance
+
   return (
     <UserContext.Provider value={user}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/config" element={<Config />} />
-            <Route path="/transfers" element={<Transfers />} />
-          </Routes>
-        </View>
-        <BottomAppbar />
-      </SafeAreaView>
+      <BalanceContext.Provider value={{ balance, setBalance }}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/config" element={<Config />} />
+              <Route path="/transfers" element={<Transfers />} />
+            </Routes>
+          </View>
+          <BottomAppbar />
+        </SafeAreaView>
+      </BalanceContext.Provider>
     </UserContext.Provider>
   );
 }
