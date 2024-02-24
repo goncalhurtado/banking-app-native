@@ -4,27 +4,32 @@ import { TouchableOpacity, View, Text } from "react-native";
 import { transfersStyle } from "../../style/TransfersStyle";
 import { Keyboard } from "react-native";
 import { axiosInstance } from "../../config/axiosInstance";
+import { checkDestination } from "../../helpers/transferHelper";
 
-const TransferInput = () => {
+const TransferInput = ({ newTransfer, setNewTransfer }) => {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    boolean: false,
+    message: "",
+  });
   const textInputRef = useRef(null);
 
-  const handle = () => {
-    Keyboard.dismiss();
-    checkDestination(text);
+  const handleChange = (text) => {
+    setText(text);
+    setError({
+      boolean: false,
+      message: "",
+    });
   };
 
-  const checkDestination = async (text) => {
-    try {
-      setLoading(true);
-      const response = await axiosInstance.get(`/checkDestination/${text}`);
-      console.log(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
+  const handle = async () => {
+    Keyboard.dismiss();
+    const response = await checkDestination(text, setError, setLoading);
+    if (!response) {
+      return;
     }
+    setNewTransfer({ ...newTransfer, destination: response });
   };
 
   useEffect(() => {
@@ -39,11 +44,13 @@ const TransferInput = () => {
         ref={textInputRef}
         label="Ingresá el Cvu o ALIAS de destino"
         value={text}
-        onChangeText={setText}
+        onChangeText={handleChange}
         right={<TextInput.Icon icon="close" />}
+        error={error.boolean}
       />
-
-      <HelperText></HelperText>
+      <HelperText style={{ color: "red" }}>
+        {error.boolean && error.message}
+      </HelperText>
       <View style={{ marginTop: 20 }}>
         <TouchableOpacity style={transfersStyle.transferBtn} onPress={handle}>
           {loading ? (
