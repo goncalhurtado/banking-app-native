@@ -42,6 +42,7 @@ const TransferInput = () => {
         onChangeText={setText}
         right={<TextInput.Icon icon="close" />}
       />
+
       <HelperText></HelperText>
       <View style={{ marginTop: 20 }}>
         <TouchableOpacity style={transfersStyle.transferBtn} onPress={handle}>
