@@ -6,6 +6,8 @@ import Transfers from "./pages/Transfers.js";
 import { Routes, Route } from "react-router-native";
 import { useState, useEffect } from "react";
 import UserContext from "./context/userContext";
+import { View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 function Main() {
   const [user, setUser] = useState({
@@ -20,11 +22,13 @@ function Main() {
   return (
     <UserContext.Provider value={user}>
       <SafeAreaView style={{ flex: 1 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/config" element={<Config />} />
-          <Route path="/transfers" element={<Transfers />} />
-        </Routes>
+        <View style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/config" element={<Config />} />
+            <Route path="/transfers" element={<Transfers />} />
+          </Routes>
+        </View>
         <BottomAppbar />
       </SafeAreaView>
     </UserContext.Provider>

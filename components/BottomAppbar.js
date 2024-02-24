@@ -7,30 +7,22 @@ import { Link } from "react-router-native";
 
 const BOTTOM_APPBAR_HEIGHT = 56;
 
-const styles = StyleSheet.create({
-  bottom: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "red",
-    margin: 0,
-    padding: 0,
-  },
-});
-
 export default function BottomAppbar() {
   const { bottom } = useSafeAreaInsets();
 
   return (
-    <View style={{ flex: 1, margin: 0, padding: 0, overflow: "hidden" }}>
+    <View
+      style={{
+        margin: 0,
+
+        padding: 0,
+        overflow: "hidden",
+      }}
+    >
       <View
-        style={[
-          styles.bottom,
-          {
-            height: BOTTOM_APPBAR_HEIGHT + bottom,
-          },
-        ]}
+        style={{
+          height: BOTTOM_APPBAR_HEIGHT + bottom,
+        }}
       >
         <View style={appbar.container}>
           <Link to="/" style={appbar.button}>

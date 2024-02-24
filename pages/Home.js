@@ -9,6 +9,7 @@ import UserContext from "../context/userContext";
 const Home = () => {
   const [balance, setBalance] = useState(null);
   const [transferHistory, setTransferHistory] = useState([]);
+  const [detail, setDetail] = useState({ visible: false, data: {} });
 
   const user = useContext(UserContext);
 
@@ -25,7 +26,7 @@ const Home = () => {
   const getTransferHistory = async () => {
     try {
       const response = await axiosInstance.get(
-        `/transactions/${user.id}?limit=5&page=2`
+        `/transactions/${user.id}?limit=15&page=1`
       );
       const { transactions } = response.data;
       setTransferHistory(transactions);
@@ -41,8 +42,12 @@ const Home = () => {
 
   return (
     <ScrollView style={homeStyle.container}>
-      <Balance balance={balance} />
-      <TransferHistory transferHistory={transferHistory} />
+      {!detail.visible ? <Balance balance={balance} /> : null}
+      <TransferHistory
+        transferHistory={transferHistory}
+        setDetail={setDetail}
+        detail={detail}
+      />
     </ScrollView>
   );
 };
