@@ -5,6 +5,7 @@ import { setInitials } from "../../helpers/fromatInfo";
 import { Avatar } from "react-native-paper";
 import { set } from "date-fns";
 import { amountStyle } from "../../style/TransfersStyle";
+import SetNoteAndConfirm from "./SetNoteAndConfirm";
 
 const SetAmount = ({ newTransfer, setNewTransfer }) => {
   const { destinationName, destinationLastname } = newTransfer;
@@ -24,33 +25,54 @@ const SetAmount = ({ newTransfer, setNewTransfer }) => {
     }
   };
 
+  const handle = () => {
+    setNewTransfer({
+      ...newTransfer,
+      amount,
+    });
+  };
+
   return (
-    <View style={amountStyle.container}>
-      <View style={amountStyle.destinationContainer}>
-        <Avatar.Text size={50} label={initials} backgroundColor="#6200EE" />
-        <Text style={amountStyle.name}>{fullName}</Text>
-        <Text style={amountStyle.balance}>Tu saldo: ${balance}</Text>
+    <>
+      <View style={amountStyle.container}>
+        <View style={amountStyle.destinationContainer}>
+          <Avatar.Text size={50} label={initials} backgroundColor="#6200EE" />
+          <Text style={amountStyle.name}>{fullName}</Text>
+          <Text style={amountStyle.balance}>Tu saldo: ${balance}</Text>
+        </View>
+        {newTransfer.amount === 0 ? (
+          <>
+            <View>
+              <TextInput
+                style={[
+                  amountStyle.amount,
+                  { color: insufficientFunds ? "red" : "black" },
+                ]}
+                keyboardType="numeric"
+                onChangeText={handleChange}
+              />
+            </View>
+            <TouchableOpacity
+              style={[
+                amountStyle.btn,
+                { backgroundColor: insufficientFunds ? "red" : "#6200EE" },
+              ]}
+              disabled={insufficientFunds}
+              onPress={handle}
+            >
+              <Text style={{ color: "white" }}>Confirmar Monto</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <>
+            <SetNoteAndConfirm
+              newTransfer={newTransfer}
+              setNewTransfer={setNewTransfer}
+            />
+          </>
+        )}
       </View>
-      <View>
-        <TextInput
-          style={[
-            amountStyle.amount,
-            { color: insufficientFunds ? "red" : "black" },
-          ]}
-          keyboardType="numeric"
-          onChangeText={handleChange}
-        />
-      </View>
-      <TouchableOpacity
-        style={[
-          amountStyle.btn,
-          { backgroundColor: insufficientFunds ? "red" : "#6200EE" },
-        ]}
-        disabled={insufficientFunds}
-      >
-        <Text style={{ color: "white" }}>Confirmar Monto</Text>
-      </TouchableOpacity>
-    </View>
+    </>
   );
 };
 export default SetAmount;
