@@ -13,7 +13,7 @@ import Profile from "./pages/Profile.js";
 
 function Main() {
   const [user, setUser] = useState({
-    id: "65d692124964ee4f1fc1a349",
+    _id: "65d692124964ee4f1fc1a349",
     name: "Severo",
     lastname: "Los dedos",
     email: "akshay@mail.com",
@@ -34,7 +34,7 @@ function Main() {
                 path="/"
                 element={<Home setHideAppbar={setHideAppbar} />}
               />
-              <Route path="/config" element={<Config />} />
+              {/* <Route path="/config" element={<Config />} /> */}
               <Route
                 path="/transfers"
                 element={<Transfers setHideAppbar={setHideAppbar} />}

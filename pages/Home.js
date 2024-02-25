@@ -18,7 +18,7 @@ const Home = ({ setHideAppbar }) => {
   const getBalance = async () => {
     try {
       setLoading(true);
-      const response = await axiosInstance.get(`/balance/${user.id}`);
+      const response = await axiosInstance.get(`/balance/${user._id}`);
       setLoading(false);
       const { balanceAmount } = response.data;
       setBalance(balanceAmount);
@@ -31,7 +31,7 @@ const Home = ({ setHideAppbar }) => {
     try {
       setLoading(true);
       const response = await axiosInstance.get(
-        `/transactions/${user.id}?limit=15&page=1`
+        `/transactions/${user._id}?limit=15&page=1`
       );
       setLoading(false);
       const { transactions } = response.data;

@@ -17,6 +17,29 @@ export default function BottomAppbar() {
   const initials = setInitials(originName);
   const { bottom } = useSafeAreaInsets();
 
+  const links = [
+    {
+      path: "/",
+      icon: "home",
+      text: "Inicio",
+    },
+    {
+      path: "/transfers",
+      icon: "swap",
+      text: "Transferir",
+    },
+    {
+      path: "/profile",
+      icon: "user",
+      text: "Mi Cuenta",
+    },
+    // {
+    //   path: "/config",
+    //   icon: "setting",
+    //   text: "Configuracion",
+    // }
+  ];
+
   return (
     <View
       style={{
@@ -31,32 +54,14 @@ export default function BottomAppbar() {
         }}
       >
         <View style={appbar.container}>
-          <Link to="/" style={appbar.button}>
-            <View style={appbar.button}>
-              <Icon name="home" size={25} color="white" />
-              <Text style={appbar.text}>Inicio</Text>
-            </View>
-          </Link>
-
-          <Link to="/transfers" style={appbar.button}>
-            <View style={appbar.button}>
-              <Icon name="swap" size={25} color="white" />
-              <Text style={appbar.text}>Transferir</Text>
-            </View>
-          </Link>
-          <Link to="/profile" style={appbar.button}>
-            <View style={appbar.button}>
-              <Icon name="user" size={25} color="white" />
-              <Text style={appbar.text}>Mi Cuenta</Text>
-            </View>
-          </Link>
-
-          <Link to="/config" style={appbar.button}>
-            <View style={appbar.button}>
-              <Icon name="setting" size={25} color="white" />
-              <Text style={appbar.text}>Configuracion</Text>
-            </View>
-          </Link>
+          {links.map((link, index) => (
+            <Link to={link.path} style={appbar.button} key={index}>
+              <View style={appbar.button}>
+                <Icon name={link.icon} size={25} color="white" />
+                <Text style={appbar.text}>{link.text}</Text>
+              </View>
+            </Link>
+          ))}
         </View>
       </View>
     </View>

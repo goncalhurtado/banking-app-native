@@ -13,7 +13,7 @@ const NewTransfer = ({ setAction, setHideAppbar, contact, setContact }) => {
   const [step, setStep] = useState(1);
 
   const [newTransfer, setNewTransfer] = useState({
-    origin: user.id,
+    origin: user._id,
     destination: "",
     destinationName: "",
     destinationLastname: "",
