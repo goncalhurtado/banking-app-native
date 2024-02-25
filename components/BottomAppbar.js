@@ -4,17 +4,23 @@ import appbar from "../style/AppBar";
 import { Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Link } from "react-router-native";
+import { Avatar } from "react-native-paper";
+import { useContext } from "react";
+import UserContext from "../context/userContext";
+import { setInitials } from "../helpers/fromatInfo";
 
 const BOTTOM_APPBAR_HEIGHT = 56;
 
 export default function BottomAppbar() {
+  const user = useContext(UserContext);
+  const originName = `${user.name} ${user.lastname}`;
+  const initials = setInitials(originName);
   const { bottom } = useSafeAreaInsets();
 
   return (
     <View
       style={{
         margin: 0,
-
         padding: 0,
         overflow: "hidden",
       }}
@@ -36,6 +42,12 @@ export default function BottomAppbar() {
             <View style={appbar.button}>
               <Icon name="swap" size={25} color="white" />
               <Text style={appbar.text}>Transferir</Text>
+            </View>
+          </Link>
+          <Link to="/profile" style={appbar.button}>
+            <View style={appbar.button}>
+              <Icon name="user" size={25} color="white" />
+              <Text style={appbar.text}>Mi Cuenta</Text>
             </View>
           </Link>
 
