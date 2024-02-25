@@ -1,7 +1,16 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import { useState, useRef } from "react";
+import { View, Text, TouchableOpacity, Keyboard } from "react-native";
+import { TextInput, ActivityIndicator } from "react-native-paper";
+import { useState, useRef, useContext } from "react";
+import { transfersStyle, amountStyle } from "../../style/TransfersStyle";
+import { makeTransaction } from "../../helpers/transferHelper";
+import BalanceContext from "../../context/balanceContext";
+import DestinationHeader from "./DestinationHeader";
 
 const SetNoteAndConfirm = ({ newTransfer, setNewTransfer }) => {
+  const { destinationName, destinationLastname } = newTransfer;
+
+  const { balance } = useContext(BalanceContext);
+
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({
@@ -10,42 +19,78 @@ const SetNoteAndConfirm = ({ newTransfer, setNewTransfer }) => {
   });
   const textInputRef = useRef(null);
 
-  const handleChange = (text) => {
-    setText(text);
+  const handleChange = (note) => {
+    setNote(note);
     setError({
       boolean: false,
       message: "",
     });
   };
-  const handle = () => {
-    setNewTransfer({
+
+  const handle = async () => {
+    Keyboard.dismiss();
+
+    const updatedTransfer = {
       ...newTransfer,
       notes: note,
+    };
+
+    const response = await makeTransaction(
+      updatedTransfer,
+      setError,
+      setLoading
+    );
+    if (!response) {
+      return;
+    }
+    setNewTransfer({
+      ...updatedTransfer,
+      done: true,
     });
   };
 
   return (
-    <View style={{ height: "100%", backgroundColor: "red" }}>
-      <TextInput
-        ref={textInputRef}
-        label="Mensaje"
-        value={note}
-        onChangeText={handleChange}
-        error={error.boolean}
+    <>
+      <DestinationHeader
+        name={destinationName}
+        lastname={destinationLastname}
+        balance={balance}
       />
-
-      <View style={{ marginTop: 20 }}>
-        <TouchableOpacity onPress={handle}>
-          {loading ? (
-            <ActivityIndicator size="small" color="#ffffff" />
-          ) : (
-            <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>
-              Enviar
-            </Text>
-          )}
-        </TouchableOpacity>
+      <View style={{ height: "100%", width: "100%" }}>
+        <Text
+          style={[
+            amountStyle.amount,
+            {
+              color: "black",
+              textAlign: "center",
+              marginBottom: 10,
+            },
+          ]}
+        >
+          ${newTransfer.amount}
+        </Text>
+        <TextInput
+          ref={textInputRef}
+          label="Mensaje (opcional)"
+          value={note}
+          onChangeText={handleChange}
+          error={error.boolean}
+        />
+        <View style={{ marginTop: 20 }}>
+          <TouchableOpacity onPress={handle} style={transfersStyle.transferBtn}>
+            {loading ? (
+              <ActivityIndicator size="small" color="#ffffff" />
+            ) : (
+              <Text
+                style={{ color: "white", fontWeight: "bold", fontSize: 18 }}
+              >
+                Enviar
+              </Text>
+            )}
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 export default SetNoteAndConfirm;

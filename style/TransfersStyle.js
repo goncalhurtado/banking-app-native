@@ -103,6 +103,55 @@ export const amountStyle = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     color: "#6200EE",
+    textAlign: "center",
+  },
+  btn: {
+    backgroundColor: "#6200EE",
+    width: "auto",
+    height: 50,
+    borderRadius: 10,
+    padding: 10,
+    paddingHorizontal: 20,
+    marginTop: 15,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+export const checkout = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconCont: {
+    backgroundColor: "#e6d9ff",
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  icon: {
+    fontSize: 50,
+    color: "#6200EE",
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#6200EE",
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 20,
+    color: "grey",
+    width: "80%",
+    height: "auto",
+    textAlign: "center",
   },
   btn: {
     backgroundColor: "#6200EE",

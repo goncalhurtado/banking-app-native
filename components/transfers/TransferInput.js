@@ -14,6 +14,14 @@ const TransferInput = ({ newTransfer, setNewTransfer }) => {
   });
   const textInputRef = useRef(null);
 
+  const clear = () => {
+    setText("");
+    setError({
+      boolean: false,
+      message: "",
+    });
+  };
+
   const handleChange = (text) => {
     setText(text);
     setError({
@@ -26,6 +34,13 @@ const TransferInput = ({ newTransfer, setNewTransfer }) => {
     Keyboard.dismiss();
     const response = await checkDestination(text, setError, setLoading);
     if (!response) {
+      return;
+    }
+    if (response._id === newTransfer.origin) {
+      setError({
+        boolean: true,
+        message: "No puedes transferirte a ti mismo",
+      });
       return;
     }
     setNewTransfer({
@@ -49,7 +64,7 @@ const TransferInput = ({ newTransfer, setNewTransfer }) => {
         label="Ingresá el Cvu o ALIAS de destino"
         value={text}
         onChangeText={handleChange}
-        right={<TextInput.Icon icon="close" />}
+        right={<TextInput.Icon icon="close" onPress={clear} />}
         error={error.boolean}
       />
       <HelperText style={{ color: "red" }}>

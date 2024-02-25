@@ -4,7 +4,6 @@ import { ScrollView, View } from "react-native";
 import { balanceStyle } from "../../style/HomeStyle";
 
 function Balance({ balance }) {
-  console.log(balance);
   return (
     <View style={balanceStyle.container}>
       <Text style={balanceStyle.title}>Saldo</Text>

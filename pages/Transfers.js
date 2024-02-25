@@ -1,17 +1,18 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import SearchBar from "../components/transfers/SearchBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { transfersStyle } from "../style/TransfersStyle";
 import ActionBtns from "../components/transfers/ActionBtns";
 import NewTransfer from "../components/transfers/NewTransfer";
 
-const Transfers = () => {
+const Transfers = ({ setHideAppbar }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [action, setAction] = useState(false);
 
-  const showMyData = () => {
-    console.log("Show my data");
-  };
+  useEffect(() => {
+    setHideAppbar(action);
+  }, [action]);
+
   return (
     <View style={transfersStyle.container}>
       {!action ? (
@@ -21,7 +22,7 @@ const Transfers = () => {
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
-            <TouchableOpacity style={{ width: "30%" }} onPress={showMyData}>
+            <TouchableOpacity style={{ width: "30%" }}>
               <Text style={transfersStyle.btnSimple}>Mis Datos</Text>
             </TouchableOpacity>
           </View>
@@ -30,7 +31,7 @@ const Transfers = () => {
           </View>
         </>
       ) : (
-        <NewTransfer setAction={setAction} />
+        <NewTransfer setAction={setAction} setHideAppbar={setHideAppbar} />
       )}
     </View>
   );

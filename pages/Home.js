@@ -7,7 +7,7 @@ import { axiosInstance } from "../config/axiosInstance";
 import UserContext from "../context/userContext";
 import BalanceContext from "../context/balanceContext";
 
-const Home = () => {
+const Home = ({ setHideAppbar }) => {
   const [transferHistory, setTransferHistory] = useState([]);
   const [detail, setDetail] = useState({ visible: false, data: {} });
 
@@ -37,6 +37,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    setHideAppbar(false);
     getBalance();
     getTransferHistory();
   }, []);
