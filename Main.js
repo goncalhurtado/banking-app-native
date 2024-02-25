@@ -9,12 +9,13 @@ import UserContext from "./context/userContext";
 import BalanceContext from "./context/balanceContext"; // Importa BalanceContext
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Profile from "./pages/Profile.js";
 
 function Main() {
   const [user, setUser] = useState({
-    id: "65d691da4964ee4f1fc1a344",
-    name: "Akshay",
-    lastname: "Goncal",
+    id: "65d692124964ee4f1fc1a349",
+    name: "Severo",
+    lastname: "Los dedos",
     email: "akshay@mail.com",
     cvu: "5146498576331",
     alias: "akshay.goncal.fakebank",
@@ -37,6 +38,10 @@ function Main() {
               <Route
                 path="/transfers"
                 element={<Transfers setHideAppbar={setHideAppbar} />}
+              />
+              <Route
+                path="/profile"
+                element={<Profile setHideAppbar={setHideAppbar} />}
               />
             </Routes>
           </View>

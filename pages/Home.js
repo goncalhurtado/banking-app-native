@@ -10,13 +10,16 @@ import BalanceContext from "../context/balanceContext";
 const Home = ({ setHideAppbar }) => {
   const [transferHistory, setTransferHistory] = useState([]);
   const [detail, setDetail] = useState({ visible: false, data: {} });
+  const [loading, setLoading] = useState(true);
 
   const user = useContext(UserContext);
   const { balance, setBalance } = useContext(BalanceContext);
 
   const getBalance = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get(`/balance/${user.id}`);
+      setLoading(false);
       const { balanceAmount } = response.data;
       setBalance(balanceAmount);
     } catch (error) {
@@ -26,9 +29,11 @@ const Home = ({ setHideAppbar }) => {
 
   const getTransferHistory = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get(
         `/transactions/${user.id}?limit=15&page=1`
       );
+      setLoading(false);
       const { transactions } = response.data;
       setTransferHistory(transactions);
     } catch (error) {
@@ -45,11 +50,17 @@ const Home = ({ setHideAppbar }) => {
   return (
     <ScrollView style={homeStyle.container}>
       {!detail.visible ? <Balance balance={balance} /> : null}
-      <TransferHistory
-        transferHistory={transferHistory}
-        setDetail={setDetail}
-        detail={detail}
-      />
+      {!loading ? (
+        <TransferHistory
+          transferHistory={transferHistory}
+          setDetail={setDetail}
+          detail={detail}
+        />
+      ) : (
+        <View style={homeStyle.noHistoryContainer}>
+          <Text style={homeStyle.noHistoryText}>Cargando</Text>
+        </View>
+      )}
     </ScrollView>
   );
 };

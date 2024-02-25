@@ -1,6 +1,5 @@
-import { useState, useContext } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
-import { IconButton } from "react-native-paper";
+import { useState, useContext, useEffect } from "react";
+import { View } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import TransferInput from "./TransferInput";
 import SetAmount from "./SetAmount";
@@ -8,7 +7,7 @@ import UserContext from "../../context/userContext";
 import SetNoteAndConfirm from "./SetNoteAndConfirm";
 import CheckoutTransfer from "./CheckoutTransfer";
 
-const NewTransfer = ({ setAction, setHideAppbar }) => {
+const NewTransfer = ({ setAction, setHideAppbar, contact, setContact }) => {
   const user = useContext(UserContext);
 
   const [step, setStep] = useState(1);
@@ -24,13 +23,44 @@ const NewTransfer = ({ setAction, setHideAppbar }) => {
   });
 
   const goBack = () => {
-    if (step > 1) {
-      setStep(step - 1);
-      setHideAppbar(false);
-    } else {
+    if (!contact.selected && step === 1) {
       setAction(false);
+      setHideAppbar(false);
+      setStep(1);
+      return;
+    }
+
+    if (contact.selected && step === 2) {
+      setAction(false);
+      setHideAppbar(false);
+      setStep(1);
+      setContact({ selected: false, data: {} });
+      return;
+    }
+    if (!contact.selected && step === 2) {
+      setStep(1);
+      return;
+    }
+
+    if (step === 3) {
+      setStep(2);
+      return;
     }
   };
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    if (contact.selected) {
+      setNewTransfer({
+        ...newTransfer,
+        destination: contact.data._id,
+        destinationName: contact.data.name,
+        destinationLastname: contact.data.lastname,
+      });
+      setStep(2);
+    }
+  }, [contact]);
 
   return (
     <View>

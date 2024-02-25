@@ -31,7 +31,6 @@ const ActionBtns = ({ setAction }) => {
       style={{
         display: "flex",
         flexDirection: "row",
-        flex: 1,
         justifyContent: "space-between",
       }}
     >
