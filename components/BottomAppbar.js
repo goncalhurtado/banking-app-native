@@ -1,20 +1,13 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import appbar from "../style/AppBar";
 import { Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Link } from "react-router-native";
-import { Avatar } from "react-native-paper";
-import { useContext } from "react";
-import UserContext from "../context/userContext";
-import { setInitials } from "../helpers/fromatInfo";
 
 const BOTTOM_APPBAR_HEIGHT = 56;
 
 export default function BottomAppbar() {
-  const user = useContext(UserContext);
-  const originName = `${user.name} ${user.lastname}`;
-  const initials = setInitials(originName);
   const { bottom } = useSafeAreaInsets();
 
   const links = [

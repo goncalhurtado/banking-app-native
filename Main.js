@@ -10,6 +10,7 @@ import BalanceContext from "./context/balanceContext"; // Importa BalanceContext
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Profile from "./pages/Profile.js";
+import MyAccountData from "./components/MyAccountData.js";
 
 function Main() {
   const [user, setUser] = useState({
@@ -43,6 +44,7 @@ function Main() {
                 path="/profile"
                 element={<Profile setHideAppbar={setHideAppbar} />}
               />
+              {/* <Route path="/profile/myaccount" element={<MyAccountData />} /> */}
             </Routes>
           </View>
           <View

@@ -1,5 +1,5 @@
 import { Text, View, TouchableOpacity } from "react-native";
-import SearchBar from "../components/transfers/SearchBar";
+import SearchComp from "../components/transfers/contacts/SearchComp";
 import { useState, useEffect, useContext } from "react";
 import { transfersStyle } from "../style/TransfersStyle";
 import ActionBtns from "../components/transfers/ActionBtns";
@@ -7,16 +7,18 @@ import NewTransfer from "../components/transfers/NewTransfer";
 import { axiosInstance } from "../config/axiosInstance";
 import Contacts from "../components/transfers/contacts/Contacts";
 import UserContext from "../context/userContext";
+import MyAccountData from "../components/MyAccountData";
+import { useNavigate } from "react-router-native";
 
 const Transfers = ({ setHideAppbar }) => {
   const user = useContext(UserContext);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [action, setAction] = useState(false);
+  const [contactsData, setContactsData] = useState([]);
   const [contact, setContact] = useState({
     selected: false,
   });
-  const [contactsData, setContactsData] = useState([]);
 
   const getContactData = async () => {
     try {
@@ -28,26 +30,22 @@ const Transfers = ({ setHideAppbar }) => {
     }
   };
 
+  // const navigate = useNavigate();
+
   useEffect(() => {
     setHideAppbar(action);
     getContactData();
     if (contact.selected) {
-      setAction(true);
+      setAction("new");
     }
   }, [action, contact.selected]);
   return (
     <View style={transfersStyle.container}>
       <View>
-        {!action ? (
+        {!action && (
           <>
             <View style={transfersStyle.header}>
-              <SearchBar
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-              />
-              <TouchableOpacity style={{ width: "30%" }}>
-                <Text style={transfersStyle.btnSimple}>Mis Datos</Text>
-              </TouchableOpacity>
+              <SearchComp />
             </View>
             <View>
               <ActionBtns setAction={setAction} />
@@ -57,7 +55,8 @@ const Transfers = ({ setHideAppbar }) => {
               <Contacts data={contactsData} setContact={setContact} />
             </View>
           </>
-        ) : (
+        )}
+        {action === "new" && (
           <NewTransfer
             setAction={setAction}
             setHideAppbar={setHideAppbar}
@@ -65,6 +64,7 @@ const Transfers = ({ setHideAppbar }) => {
             setContact={setContact}
           />
         )}
+        {action === "mydata" && <MyAccountData setAction={setAction} />}
       </View>
     </View>
   );
