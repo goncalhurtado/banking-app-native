@@ -8,7 +8,7 @@ const HeaderProfile = ({ user }) => {
   return (
     <List.Item
       title={`${name} ${lastname}`}
-      description="Ver mis datos"
+      description={email}
       left={(props) => (
         <Avatar.Text
           style={{ alignSelf: "center" }}
