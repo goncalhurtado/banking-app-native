@@ -14,7 +14,7 @@ const TransferDetail = ({ transfer, setDetail }) => {
   const originName = `${origin.name} ${origin.lastname}`;
   const destinationName = `${destination.name} ${destination.lastname}`;
 
-  const isOriginUser = origin._id === user.id;
+  const isOriginUser = origin._id === user._id;
   const name = isOriginUser ? destinationName : originName;
   //   const initials = setInitials(name);
 

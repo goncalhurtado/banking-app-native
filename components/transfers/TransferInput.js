@@ -23,7 +23,7 @@ const TransferInput = ({ newTransfer, setNewTransfer }) => {
   };
 
   const handleChange = (text) => {
-    setText(text);
+    setText(text.toLowerCase());
     setError({
       boolean: false,
       message: "",

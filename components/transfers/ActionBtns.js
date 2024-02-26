@@ -17,7 +17,7 @@ const ActionBtns = ({ setAction }) => {
     },
     {
       icon: "profile",
-      text: "Mis Datos",
+      text: "Mis datos",
       action: "mydata",
     },
   ];
@@ -31,7 +31,6 @@ const ActionBtns = ({ setAction }) => {
       style={{
         display: "flex",
         flexDirection: "row",
-        flex: 1,
         justifyContent: "space-between",
       }}
     >
@@ -44,6 +43,7 @@ const ActionBtns = ({ setAction }) => {
               : transfersStyle.buttonSecondary
           }
           onPress={() => handleAction(data.action)}
+          disabled={data.icon === "qrcode" ? true : false}
         >
           <Icon
             name={data.icon}

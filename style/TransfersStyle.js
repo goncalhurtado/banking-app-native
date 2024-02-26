@@ -9,6 +9,9 @@ export const transfersStyle = StyleSheet.create({
   },
   container: {
     padding: 10,
+    height: "100%",
+    flexDirection: "column",
+    // backgroundColor: "red",
   },
   btnSimple: {
     fontSize: 16,
