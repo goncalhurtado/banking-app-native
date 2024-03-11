@@ -7,7 +7,7 @@ import UserContext from "../../context/userContext";
 import { useContext } from "react";
 
 const TransferDetail = ({ transfer, setDetail }) => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const { origin, destination, amount, createdAt } = transfer.data;
 
@@ -35,7 +35,7 @@ const TransferDetail = ({ transfer, setDetail }) => {
             onPress={goBack}
             style={{ margin: 0 }}
           />
-          <Text style={transferDetailStyle.bankName}>TatiBank</Text>
+          <Text style={transferDetailStyle.bankName}>BankApp</Text>
           <View></View>
         </View>
         <View style={transferDetailStyle.container}>

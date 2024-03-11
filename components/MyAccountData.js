@@ -6,7 +6,7 @@ import UserContext from "../context/userContext";
 import Qr from "./Qr";
 
 const MyAccountData = ({ setAction }) => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const goBack = () => {
     setAction(false);

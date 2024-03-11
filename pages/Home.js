@@ -12,7 +12,8 @@ const Home = ({ setHideAppbar }) => {
   const [detail, setDetail] = useState({ visible: false, data: {} });
   const [loading, setLoading] = useState(true);
 
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
+
   const { balance, setBalance } = useContext(BalanceContext);
 
   const getBalance = async () => {

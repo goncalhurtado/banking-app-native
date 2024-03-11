@@ -11,7 +11,7 @@ import MyAccountData from "../components/MyAccountData";
 import { useNavigate } from "react-router-native";
 
 const Transfers = ({ setHideAppbar }) => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [action, setAction] = useState(false);
