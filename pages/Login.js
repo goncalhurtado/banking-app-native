@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, Text, TextInput } from "react-native-paper";
 import UserContext from "../context/userContext";
 import { axiosInstance } from "../config/axiosInstance";
 import { useNavigate } from "react-router-native";
@@ -34,7 +34,27 @@ function Login() {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", padding: 16 }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        padding: 16,
+        marginBottom: 80,
+      }}
+    >
+      <View>
+        <Text
+          style={{
+            textAlign: "center",
+            marginTop: 10,
+            fontSize: 20,
+            fontWeight: "bold",
+            marginBottom: 16,
+          }}
+        >
+          Bienvenido a BankApp!
+        </Text>
+      </View>
       <TextInput
         label="Email"
         value={email}
