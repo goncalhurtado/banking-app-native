@@ -1,8 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { List } from "react-native-paper";
 import Icon from "react-native-vector-icons/AntDesign";
-
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import UserContext from "../context/userContext";
 import Qr from "./Qr";
 
@@ -15,7 +14,7 @@ const MyAccountData = ({ setAction }) => {
 
   return (
     <>
-      <View style={{ marginBottom: 30 }}>
+      <View style={{ marginBottom: 5 }}>
         <Icon name="close" size={25} color="#6200EE" onPress={goBack} />
       </View>
       <View>
