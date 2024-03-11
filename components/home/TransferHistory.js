@@ -7,7 +7,7 @@ import TransferDetail from "./TransferDetail";
 import { set } from "date-fns";
 
 function TransferHistory({ transferHistory, setDetail, detail }) {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const seeDetails = (transfer) => {
     setDetail({

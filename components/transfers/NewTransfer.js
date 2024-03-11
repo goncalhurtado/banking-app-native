@@ -8,7 +8,7 @@ import SetNoteAndConfirm from "./SetNoteAndConfirm";
 import CheckoutTransfer from "./CheckoutTransfer";
 
 const NewTransfer = ({ setAction, setHideAppbar, contact, setContact }) => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const [step, setStep] = useState(1);
 

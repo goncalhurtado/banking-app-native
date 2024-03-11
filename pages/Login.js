@@ -1,60 +1,86 @@
-// import { useContext, useState } from "react";
-// import { View } from "react-native";
-// import { Button, TextInput } from "react-native-paper";
-// import UserContext from "../context/userContext";
-// import { axiosInstance } from "../config/axiosInstance";
+import { useContext, useState, useEffect } from "react";
+import { View } from "react-native";
+import { Button, Text, TextInput } from "react-native-paper";
+import UserContext from "../context/userContext";
+import { axiosInstance } from "../config/axiosInstance";
+import { useNavigate } from "react-router-native";
 
-// function Login() {
-//   const { setUser } = useContext(UserContext);
+function Login() {
+  const { setUser, user } = useContext(UserContext);
 
-//   const [input, setInput] = useState({
-//     email: "",
-//     password: "",
-//   });
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+  });
 
-//   const [setLoading] = useState(false);
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-//   const handleLogin = async () => {
-//     setInput({ email, password });
-//     try {
-//       const response = await axiosInstance.post("/login", input);
-//       //   setUser(response.data);
-//       console.log(response.data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-//   return (
-//     <View style={{ flex: 1, justifyContent: "center", padding: 16 }}>
-//       <TextInput
-//         label="Email"
-//         value={email}
-//         onChangeText={setEmail}
-//         mode="outlined"
-//         autoCapitalize="none"
-//         autoCompleteType="email"
-//         textContentType="emailAddress"
-//         keyboardType="email-address"
-//         style={{ marginBottom: 16 }}
-//       />
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.post("/login", { email, password });
+      setLoading(false);
 
-//       <TextInput
-//         label="Password"
-//         value={password}
-//         onChangeText={setPassword}
-//         mode="outlined"
-//         secureTextEntry
-//         style={{ marginBottom: 16 }}
-//       />
+      setUser(response.data.user);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
 
-//       <Button mode="contained" onPress={handleLogin}>
-//         Login
-//       </Button>
-//     </View>
-//   );
-// }
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        padding: 16,
+        marginBottom: 80,
+      }}
+    >
+      <View>
+        <Text
+          style={{
+            textAlign: "center",
+            marginTop: 10,
+            fontSize: 20,
+            fontWeight: "bold",
+            marginBottom: 16,
+          }}
+        >
+          Bienvenido a BankApp!
+        </Text>
+      </View>
+      <TextInput
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        mode="outlined"
+        autoCapitalize="none"
+        autoCompleteType="email"
+        textContentType="emailAddress"
+        keyboardType="email-address"
+        style={{ marginBottom: 16 }}
+      />
 
-// export default Login;
+      <TextInput
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        mode="outlined"
+        secureTextEntry
+        style={{ marginBottom: 16 }}
+      />
+
+      <Button mode="contained" onPress={handleLogin} loading={loading}>
+        Login
+      </Button>
+    </View>
+  );
+}
+
+export default Login;
